@@ -31,6 +31,7 @@ class Layout extends React.Component<Props> {
                     <Drawer 
                         variant={'permanent'}
                         className={classes.drawerPaper}
+                        classes={{ paper:classes.drawerPaper}}
                     >
                         <div className={classes.toolbar} />
                         <Menus />
