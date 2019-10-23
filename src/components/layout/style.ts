@@ -24,7 +24,34 @@ const layoutStyle = (theme: Theme) => createStyles({
             marginTop: 20
         }
     },
-    toolbar: theme.mixins.toolbar
+    toolbar: theme.mixins.toolbar,
+    content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing(2.5),
+        height: '100vh',
+        overflowY: 'auto',
+        boxSizing: 'border-box',
+    },
+    showLogo: {
+        width: 100,
+        transition: 'width .4s'
+    },
+    hiddenLogo: {
+        width: 0,
+        transition: 'width .4s'
+    },
+    drawerPaperHidden: {
+        width: 0,
+        height: '100vh',
+        backgroundColor: theme.palette.primary.dark,
+        color: '#fff',
+        transition: 'width .5s',
+        overflow: 'hidden',
+        '&>ul': {
+            marginTop: 20
+        }
+    }
 });
 
 export default layoutStyle;

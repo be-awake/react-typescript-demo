@@ -1,9 +1,10 @@
 import * as React from 'react'
 import {NavLink} from 'react-router-dom';
-import {List, ListItem} from '@material-ui/core';
-import {WithStyles} from '@material-ui/core';
+import {List, ListItem, Icon, Collapse, WithStyles} from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import ExpandLess from '@material-ui/icons/ChevronRight';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import menuData from './dataSet';
 
 const menusStyle = theme => ({
@@ -52,7 +53,13 @@ const menusStyle = theme => ({
 class Menus extends React.Component {
     constructor(props) {
         super(props);
-        console.log(menuData);
+        this.state = {
+            currentCollapse: '',
+        }
+    }
+
+    changeCollapse = target => {
+        this.setState({currentCollapse: this.state.currentCollapse === target ? '' : target});
     }
 
     renderLink = React.forwardRef((itemProps, ref) => (
@@ -60,16 +67,27 @@ class Menus extends React.Component {
     ));
 
 
-    getList(menu, classes) {
+    getList(menu, classes, level) {
+        let variableAttr = {
+            className: `${classes.menu} ${level === 'isChild' ? classes.nested : ''}`
+        }
+
+        if (!level || level === 'isChild') {
+            Object.assign(variableAttr, {component: this.renderLink, to: menu.link, key: menu.link, activeClassName: classes.activeMenu})
+        } else {
+            Object.assign(variableAttr, {key: menu.label, onClick: () => this.changeCollapse(menu.label)})
+        }
+
         return (
             <ListItem
                 button
-                key={menu.link}
-                component={this.renderLink}
-                to={menu.link}
-                className={`${classes.menu} ${classes.nested}`}
+                {...variableAttr}
             >
-                <div>{menu.label}</div>
+                <div className={classes.menuText}>
+                    <i className={`icon iconfont ${menu.iconName}`}></i>
+                    {menu.label}
+                </div>
+                {level === 'hasChild' && ((this.state.currentCollapse === menu.label) ? <ExpandMore fontSize={'small'} /> : <ExpandLess fontSize={'small'} />)}
             </ListItem>
         )
     }
@@ -79,6 +97,20 @@ class Menus extends React.Component {
         menuData.menus.forEach(menu => {
             if (menu.link) {
                 listItem.push(this.getList(menu, classes));
+            } else if (menu.children && menu.children.length > 0) {
+                const childrenList = [];
+                menu.children.forEach(child => {
+                    childrenList.push(this.getList(child, classes, 'isChild'))
+                })
+
+                listItem.push(this.getList(menu, classes, 'hasChild'));
+                listItem.push(
+                    <Collapse key={menu.label + '-collapse'}
+                        in={this.state.currentCollapse === menu.label}
+                        timeout="auto" unmountOnExit>
+                        {childrenList}
+                    </Collapse>
+                )
             }
         })
         return (

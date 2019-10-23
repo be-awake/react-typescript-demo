@@ -5,6 +5,8 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { Provider } from 'mobx-react'
 
+import './styles/icon.css';
+import './styles/common.css';
 import Store from './stores'
 
 ReactDOM.render(

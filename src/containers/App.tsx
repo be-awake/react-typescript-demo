@@ -3,6 +3,7 @@ import { MuiThemeProvider } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { inject, observer } from 'mobx-react';
 
+import Interception from '../components/interception'
 import Layout from '../components/layout';
 import theme from '../styles/theme';
 
@@ -17,7 +18,7 @@ class App extends React.Component<Props> {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        {/* {this.props.menuState.isOpen.toString()} */}
+        <Interception />
         <Layout />
       </MuiThemeProvider>
     );

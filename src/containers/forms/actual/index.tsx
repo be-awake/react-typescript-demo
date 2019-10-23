@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-class Forms extends React.Component {
+class Actual extends React.Component {
     render() {
         return (
             <div>
-                form
+                Actual
             </div>
         )
     }
 }
 
-export default Forms;
+export default Actual;
