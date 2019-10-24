@@ -5,8 +5,6 @@
     - 非组件文件：小驼峰命名 `camlCase` 
 2. 文件夹：小驼峰命名 `camlCase`
 
----
- 
 ## 各个文件夹功能说明
 
 ### public
@@ -36,8 +34,6 @@
 
 5. utils `工具文件`
     - requests：后台相关请求
-
----
 
 ## 相关技术
 - typescript
