@@ -16,32 +16,25 @@ const InterceptionStore = types
     .actions((self: any) => ({
         initInterceptors() {
             axios.interceptors.request.use(config => {
-                const email = localStorage.getItem('email');
-                if (email) {
-                    config.headers['email'] = email;
-                }
-                !config.headers.hiddenLoading && self.showLoading();
+                self.showLoading();
                 self.increasePendingRequests();
                 return config;
             });
             axios.interceptors.response.use(response => {
                 self.decreasePendingRequests();
-                self.pendingRequests === 0
-                    && !response.config.headers.hiddenLoading
-                    && self.hiddenLoading()
+                self.pendingRequests === 0 && self.hiddenLoading()
 
                 self.pushMessage(response.data);
                 return response;
             }, err => {
-                if (err.toString() === 'Error: Network Error') {
-                    self.hiddenLoading()
+                self.hiddenLoading()
+                if (err.response.status === 403) {
+                    window.location.replace(`${window.location.origin}/forbidden`);
+                }else{
                     self.pushMessage({
                         type: 'error',
                         message: 'Network Error'
                     });
-                }
-                if (err.response.status === 403) {
-                    window.location.replace(`${window.location.origin}/forbidden`);
                 }
                 return Promise.reject(err);
             });
@@ -67,6 +60,9 @@ const InterceptionStore = types
                     type: data.type
                 });
             }
+        },
+        cleanMessage() {
+            self.messages = [];
         }
     }));
 

@@ -7,10 +7,17 @@ class Helpers extends React.Component {
     constructor(props: any){
         super(props);
         this.getData();
+        this.postData();
     }
 
     getData() {
         requests.help.getData().then(result => {
+            console.log(result);
+        })
+    }
+
+    postData(){
+        requests.help.postData().then(result => {
             console.log(result);
         })
     }

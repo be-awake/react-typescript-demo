@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Loading from './loading';
+import ErrorMessage from './errorMessage';
 import { inject, observer } from 'mobx-react';
 
 interface Props {
@@ -15,6 +16,7 @@ class Interception extends React.Component<Props> {
 
         return (<div>
             <Loading />
+            <ErrorMessage />
         </div>);
     };
 }
