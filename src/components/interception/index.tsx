@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Loading from './loading';
-import ErrorMessage from './errorMessage';
+import Loading from './Loading';
+import ErrorMessage from './ErrorMessage';
 import { inject, observer } from 'mobx-react';
 
 interface Props {

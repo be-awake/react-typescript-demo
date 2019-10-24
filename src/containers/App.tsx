@@ -3,8 +3,8 @@ import { MuiThemeProvider } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { inject, observer } from 'mobx-react';
 
-import Interception from '../components/interception'
-import Layout from '../components/layout';
+import Interception from '../components/interception/Index'
+import Layout from '../components/layout/Index';
 import theme from '../styles/theme';
 
 interface Props {

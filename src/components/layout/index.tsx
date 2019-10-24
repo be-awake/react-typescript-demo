@@ -6,10 +6,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import { inject, observer } from 'mobx-react';
 
-import Menus from '../config/menus';
-import Routes from '../config/routes';
+import Menus from '../config/Menus';
+import Routes from '../config/Routes';
 import styles from './style';
-import MenuControl from '../menuControl'
+import MenuControl from '../menuControl/Index'
 
 interface Props extends WithStyles<typeof styles> {
     menuState?: any

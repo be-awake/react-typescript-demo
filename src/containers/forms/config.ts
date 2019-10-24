@@ -1,5 +1,5 @@
-import ActualEdit from './actual';
-import Budget from './budget';
+import ActualEdit from './actual/Index';
+import Budget from './budget/Index';
 
 const menu = {
     label: 'Forms',

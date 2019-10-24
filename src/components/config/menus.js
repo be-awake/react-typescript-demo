@@ -67,7 +67,7 @@ class Menus extends React.Component {
     ));
 
 
-    getList(menu, classes, level) {
+    getList = (menu, classes, level) => {
         let variableAttr = {
             className: `${classes.menu} ${level === 'isChild' ? classes.nested : ''}`
         }
